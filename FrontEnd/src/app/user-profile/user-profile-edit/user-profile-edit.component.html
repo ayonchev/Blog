@@ -1,0 +1,28 @@
+<h3 class="mt-4 mb-4">Edit Profile</h3>
+
+<hr>
+
+<form #editProfileForm="ngForm">
+  <div class="form-group">
+    <label for="email">Name</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="name" name="nameControl" #nameControl="ngModel" placeholder="John Doe"
+      required pattern="^([A-Z][a-z]+)\s([A-Z][a-z]+)$">
+
+    <div *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)" class="text-danger">
+      <div *ngIf="nameControl.errors.pattern">
+        Invalid name. Your first and last name should start with a capital letter.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" email class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="john@doe.com" required>
+    <div class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+      The email is invalid
+    </div>
+  </div>
+
+  <div class="text-right">
+    <button type="submit" class="btn btn-outline-primary" (click)="edit()" [disabled]="editProfileForm.form.invalid">Edit</button>
+  </div>
+</form>

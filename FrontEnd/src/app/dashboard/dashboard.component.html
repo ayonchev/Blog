@@ -1,0 +1,47 @@
+<h2 class="mt-4">Dashboard</h2>
+<hr>
+<h5 class="text-center">Registered users</h5>
+<div *ngIf="data">
+  <table class="table table-bordered mt-4 mb-4">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Id</th>
+        <th scope="col">Username</th>
+        <th scope="col">Name</th>
+        <th scope="col">Posts Count</th>
+        <th scope="col">Comments Count</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="data.users">
+      <tr *ngFor="let user of data.users; let i = index" [ngStyle]="{'display': user.name != authService.getLoggedUser().given_name ? 'table-row' : 'none'}">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ user.id }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.postsCount }}</td>
+        <td>{{ user.commentsCount }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h5 class="text-center">Anonymous users</h5>
+  <table class="table table-bordered mt-4 mb-4">
+      <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">Comments Count</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="data.anonymousUsers">
+            <tr *ngFor="let user of data.anonymousUsers; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ user.email }}</td>
+              <td>{{ user.commentsCount }}</td>
+            </tr>
+          </tbody>
+  </table>
+</div>

@@ -1,0 +1,50 @@
+<div class="heading mt-4">
+  <h2 *ngIf="mode === 'register'">Register</h2>
+  <h2 *ngIf="mode === 'login'">Login</h2>
+</div>
+
+<hr>
+
+<div class="form-container mt-2">
+  <form #authForm="ngForm">
+    <div class="form-group" *ngIf="mode === 'register'">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="name" name="nameControl" #nameControl="ngModel" placeholder="John Doe"
+        required pattern="^([A-Z][a-z]+)\s([A-Z][a-z]+)$">
+
+      <div *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)" class="text-danger">
+        <div *ngIf="nameControl.errors.pattern">
+            Invalid name. Your first and last name should start with a capital letter.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" email class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="john@doe.com" required>
+      <div class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+        The email is invalid
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" #pw="ngModel" placeholder="******"
+        required>
+    </div>
+    <div class="form-group" *ngIf="mode === 'register'">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="pwConfirm" #pwConfirm="ngModel"
+        required compare="password" placeholder="******">
+      <div class="text-danger" *ngIf="pwConfirm.invalid && (pwConfirm.dirty || pwConfirm.touched)">
+        <div *ngIf="pwConfirm.errors['required']">Confirm password is required</div>
+        <div *ngIf="pwConfirm.errors['compare']">Passwords do not match</div>
+      </div>
+    </div>
+
+    <button *ngIf="mode === 'register'" type="submit" class="btn btn-outline-primary" (click)="register()" [disabled]="authForm.form.invalid">
+      Register
+    </button>
+    <button *ngIf="mode === 'login'" type="submit" class="btn btn-outline-primary" (click)="login()" [disabled]="authForm.form.invalid">
+      Login
+    </button>
+  </form>
+</div>

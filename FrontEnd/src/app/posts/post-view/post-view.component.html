@@ -1,0 +1,27 @@
+<div *ngIf="post" class="mb-4">
+  <div class="card mt-4">
+    <div class="card-header post-data-container d-flex w-100 justify-content-between align-items-center">
+      <h3 class="font-weight-normal">{{ post.title }}</h3>
+      <div class="btn-group" *ngIf="loggedUser && (post.author.id === loggedUser.id || loggedUser.role === 'admin')">
+        <button type="button" class="btn btn-outline-success" routerLink="/posts/{{post.postId}}">Edit</button>
+        <button type="button" class="btn btn-outline-danger" (click)="deletePost()">Delete</button>
+      </div>
+
+    </div>
+    <div class="card-body">
+      <p class="card-text lead">{{ post.content }}</p>
+    </div>
+    <div class="card-footer text-muted">
+      <div class="row">
+        <div class="col-md-4 col-xs-12 bordered">Author: {{ post.author.userName }}</div>
+        <div class="col-md-4 col-xs-12 bordered text-center">
+          Posted On: {{ post.dateCreated | date: format }}
+        </div>
+        <div class="col-md-4 col-xs-12">Category: {{ post.category.name }}</div>
+      </div>
+    </div>
+  </div>
+
+  <app-add-comment (commentAdded)="onCommentAdded($event)"></app-add-comment>
+  <app-comment-list [comments]="post.comments"></app-comment-list>
+</div>
