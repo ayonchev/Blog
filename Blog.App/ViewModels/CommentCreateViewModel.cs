@@ -18,6 +18,8 @@ namespace Blog.App.ViewModels
 
         
         public string AuthorId { get; set; }
+
+        [EmailAddress]
         public string AnonymousAuthorEmail { get; set; }
     }
 }

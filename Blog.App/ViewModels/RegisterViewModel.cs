@@ -6,6 +6,7 @@ namespace Blog.App.ViewModels
     {
         [Required]
         [MaxLength(100)]
+        [RegularExpression(@"^([A-Z][a-z]+)\s([A-Z][a-z]+)$")]
         public string Name { get; set; }
 
         [Required]
