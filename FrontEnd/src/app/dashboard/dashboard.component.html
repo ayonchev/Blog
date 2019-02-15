@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody *ngIf="data.users">
-      <tr *ngFor="let user of data.users; let i = index" [ngStyle]="{'display': user.name != authService.getLoggedUser().given_name ? 'table-row' : 'none'}">
+      <tr *ngFor="let user of data.users; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ user.id }}</td>
         <td>{{ user.userName }}</td>
@@ -44,4 +44,10 @@
             </tr>
           </tbody>
   </table>
+
+  <hr>
+
+  <div *ngIf="chart">
+    <canvas id="canvas" width="400" height="400">{{ chart }}</canvas>
+  </div>
 </div>
