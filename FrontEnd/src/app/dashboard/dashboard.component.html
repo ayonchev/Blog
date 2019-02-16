@@ -29,25 +29,26 @@
 
   <h5 class="text-center">Anonymous users</h5>
   <table class="table table-bordered mt-4 mb-4">
-      <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Email</th>
-            <th scope="col">Comments Count</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="data.anonymousUsers">
-            <tr *ngFor="let user of data.anonymousUsers; let i = index">
-              <th scope="row">{{ i + 1 }}</th>
-              <td>{{ user.email }}</td>
-              <td>{{ user.commentsCount }}</td>
-            </tr>
-          </tbody>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Email</th>
+        <th scope="col">Comments Count</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="data.anonymousUsers">
+      <tr *ngFor="let user of data.anonymousUsers; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ user.email }}</td>
+        <td>{{ user.commentsCount }}</td>
+      </tr>
+    </tbody>
   </table>
-
-  <hr>
-
-  <div *ngIf="chart">
-    <canvas id="canvas" width="400" height="400">{{ chart }}</canvas>
-  </div>
 </div>
+<hr>
+<div [hidden]="!chart">
+  <canvas #chart width="400" height="400" id="canvas">{{ chart }}</canvas>
+</div>
+<!-- <div [hidden]="!chart">
+  <canvas #chartEl id="canvas">{{ chart }}</canvas>
+</div> -->

@@ -38,7 +38,7 @@ namespace Blog.App.Controllers
             var postsCount = db.Posts.Count();
             var countPages = Math.Ceiling((double)postsCount / (double)itemsPerPage);
 
-            if (pageIndex <= 0 || itemsPerPage <= 0 || pageIndex > countPages)
+            if (pageIndex <= 0 || itemsPerPage <= 0 || (pageIndex > countPages && countPages > 0))
                 return BadRequest();
 
             var itemsToSkip = (pageIndex - 1) * itemsPerPage;
