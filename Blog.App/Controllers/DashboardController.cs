@@ -58,7 +58,8 @@ namespace Blog.App.Controllers
                                {
                                    Name = c.Name,
                                    PostsCount = c.Posts.Count()
-                               });
+                               })
+                               .ToArray();
 
             return Ok(new { users, anonymousUsers, categories });
         }

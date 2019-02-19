@@ -22,7 +22,9 @@ namespace Blog.App.Profiles
                 .ForMember(c => c.AnonAuthorEmail, o => o.MapFrom(ccvm => ccvm.AnonymousAuthorEmail));
             CreateMap<Comment, CommentViewModel>()
                 .ForMember(cvm => cvm.AnonymousAuthorEmail, o => o.MapFrom(c => c.AnonAuthorEmail));
-            CreateMap<Post, PostViewModel>();
+            CreateMap<Post, PostViewModel>()
+                .ForPath(pvm => pvm.Author.Id, o => o.MapFrom(p => p.AuthorId));
+                //.ForMember(pvm => pvm.Author.Id, o => o.MapFrom(p => p.AuthorId));
             CreateMap<PostCreateViewModel, Post>();
         }
 

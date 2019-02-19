@@ -33,7 +33,7 @@ namespace Blog.App.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult Get(int pageIndex, int itemsPerPage, string userId = null)
+        public ActionResult Get(int pageIndex = 1, int itemsPerPage = 10, string userId = null)
         {
             var postsCount = db.Posts.Count();
             var countPages = Math.Ceiling((double)postsCount / (double)itemsPerPage);
@@ -53,6 +53,7 @@ namespace Blog.App.Controllers
                           .OrderByDescending(p => p.DateCreated)
                           .Skip(itemsToSkip)
                           .Take(itemsToTake)
+                          .Select(p => mapper.Map<Post, PostViewModel>(p))
                           .ToArray();
 
             return new JsonResult(new { posts, postsCount });

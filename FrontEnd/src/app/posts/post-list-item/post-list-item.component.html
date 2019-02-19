@@ -8,7 +8,7 @@
   </div>
   <div class="d-flex w-100 justify-content-between">
     <p class="mb-1 lead">{{ post.content.substr(0, 90) }}{{ post.content.length > 90 ? '...' : null }}</p>
-    <div class="btn-group" *ngIf="loggedUser && (post.authorId === loggedUser.id || authService.isAdmin())">
+    <div class="btn-group" *ngIf="loggedUser && (post.author.id === loggedUser.id || authService.isAdmin())">
       <button type="button" class="btn btn-outline-success" routerLink="/posts/{{post.postId}}">Edit</button>
       <button type="button" class="btn btn-outline-danger" (click)="deletePost($event, post.postId)">Delete</button>
     </div>

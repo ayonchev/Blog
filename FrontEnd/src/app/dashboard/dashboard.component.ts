@@ -22,24 +22,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.dataService.getItems(this.itemsPaths.dashboard).subscribe(res => {
       this.data = res;
-      let context = this.setupCanvas(this.chartContainer.nativeElement);
-      console.log(context);
+      let context = this.chartContainer.nativeElement;
       this.chart = new Chart('canvas', {
         type: 'doughnut',
-        data:
-        //  {
-        //   datasets: [{
-        //       data: [10, 20, 30]
-        //   }],
-
-        //   // These labels appear in the legend and in the tooltips when hovering different arcs
-        //   labels: [
-        //       'Red',
-        //       'Yellow',
-        //       'Blue'
-        //   ]
-        // } 
-        {
+        data: {
           labels: this.data.categories.map(c => c.name),
           datasets: [{
             data: this.data.categories.map(c => c.postsCount),
@@ -64,20 +50,21 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  setupCanvas(canvas: ElementRef): ElementRef {
-    // Get the device pixel ratio, falling back to 1.
-    var dpr = window.devicePixelRatio || 1;
-    // Get the size of the canvas in CSS pixels.
-    var rect = canvas.getBoundingClientRect();
-    // Give the canvas pixel dimensions of their CSS
-    // size * the device pixel ratio.
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    var ctx = canvas.getContext('2d');
-    // Scale all drawing operations by the dpr, so you
-    // don't have to worry about the difference.
-    ctx.scale(dpr, dpr);
+  // setupCanvas(canvas: ElementRef): ElementRef {
+  //   // Get the device pixel ratio, falling back to 1.
+    
+  //   var dpr = window.devicePixelRatio || 1;
+  //   // Get the size of the canvas in CSS pixels.
+  //   var rect = canvas.getBoundingClientRect();
+  //   // Give the canvas pixel dimensions of their CSS
+  //   // size * the device pixel ratio.
+  //   canvas.width = rect.width * dpr;
+  //   canvas.height = rect.height * dpr;
+  //   var ctx = canvas.getContext('2d');
+  //   // Scale all drawing operations by the dpr, so you
+  //   // don't have to worry about the difference.
+  //   ctx.scale(dpr, dpr);
 
-    return canvas;
-  }
+  //   return canvas;
+  // }
 }
